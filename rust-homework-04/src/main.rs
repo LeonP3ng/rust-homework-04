@@ -1,14 +1,24 @@
 
 fn main() {
     /* 第一题 */ 
-    let redlight = TrafficLight::Red;
-    let greenlight = TrafficLight::Green;
-    let yellowlight = TrafficLight::Yellow;
-    println!("red light is :{}", redlight.time());
-    println!("green light is :{}", greenlight.time());
-    println!("yellow light is :{}", yellowlight.time());
+    let redlight = Light{
+        light_type : String::from("Red"),
+        light_time : 15,
+    };
+    let greenlight = Light{
+        light_type : String::from("Green"),
+        light_time : 60,
+    };
+    let yellowlight = Light{
+        light_type : String::from("Yellow"),
+        light_time : 3,
+    };
+    redlight.work_time();
+    greenlight.work_time();
+    yellowlight.work_time();
 
 
+    
     /*第二题*/
     let a: [u32; 5] = [1, 2, 3, 4, 5];
     try_sum(&a);
@@ -34,25 +44,18 @@ fn main() {
 
 
 /******第一题开始******/
-enum TrafficLight{
-    Red,
-    Yellow,
-    Green
+pub trait TrafficLight{
+    fn work_time(&self);
 }
 
-impl TrafficLight{
-    fn time(&self) -> u8 {
-        match &self {
-            TrafficLight::Red => {
-                15
-            },
-            TrafficLight::Yellow => {
-                3
-            },
-            TrafficLight::Green => {
-                60
-            }
-        }
+pub struct Light {
+    light_type : String,
+    light_time : u32,
+}
+
+impl TrafficLight for Light {
+    fn work_time(&self){
+        println!("{} light is : {}s", self.light_type, self.light_time);
     }
 }
 /******第一题结束******/
